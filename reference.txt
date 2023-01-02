@@ -270,6 +270,21 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 56.2) (Windows only) to set the right to trun the ps1 script with PowerShell: 
 >> Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
+57) To create and docker hub account if you do not have:
+URL: https://hub.docker.com/
+
+58) To login into docker hub:
+> docker login
+then answer your docker hub id and passoword.
+58.1) I case you got the follow error:
+"Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/auth": dial unix /var/run/docker.sock: connect: permission denied
+"
+58.1.1) then run the following command:
+> sudo chmod 666 /var/run/docker.sock
+58.1.2) and try to login again:
+> docker login
+
+
 
 
 

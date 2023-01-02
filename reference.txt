@@ -275,7 +275,7 @@ URL: https://hub.docker.com/
 
 58) To login into docker hub:
 > docker login
-then answer your docker hub id and passoword.
+then answer your docker hub id and password.
 58.1) I case you got the follow error:
 "Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/auth": dial unix /var/run/docker.sock: connect: permission denied
 "
@@ -283,6 +283,23 @@ then answer your docker hub id and passoword.
 > sudo chmod 666 /var/run/docker.sock
 58.1.2) and try to login again:
 > docker login
+58.1.3) the credential will be store within the follow file and no need to input login ID and password in next login:
+> /home/lawrence/.docker/config.json
+
+59) Build and push your image into docker hub after built example:
+59.1) set the image name begin with your docker hub name, such as "jkllucas/"
+...
+<configuration>
+	<image>
+		<name>jkllucas/mmv2-${project.artifactId}:${project.version}</name>
+	</image>
+	<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+</configuration>			
+...
+59.2) Push your image to your docker hub example:
+> docker push jkllucas/mmv2-currency-exchange-service-kubernetes:0.0.11-SNAPSHOT
+> docker push jkllucas/mmv2-currency-conversion-service-kubernetes:0.0.11-SNAPSHOT
+
 
 
 

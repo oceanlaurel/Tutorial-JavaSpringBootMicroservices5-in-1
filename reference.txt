@@ -179,6 +179,7 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 40) Get the information of Pods
 >> kubectl get pod
 >> kubectl get pods
+>> kubectl get po
 40.1) get more information of Pod:
 >> kubectl get pods -o wide
 40.2) get ex[plaon Pods (more details):
@@ -197,6 +198,7 @@ kubectl get deployment
 >> kubectl get service
 >> kubectl get services
 >> kubectl get services -o wide
+>> kubectl get svc
 
 44) Descript the details of specific pod
 >> kubectl describe pod hello-world-rest-api-bdb569b5-9gdnb
@@ -300,8 +302,36 @@ then answer your docker hub id and password.
 > docker push jkllucas/mmv2-currency-exchange-service-kubernetes:0.0.11-SNAPSHOT
 > docker push jkllucas/mmv2-currency-conversion-service-kubernetes:0.0.11-SNAPSHOT
 
+59.3) deploy & then exp[ose your deployment to public:
+> kubectl create deployment currency-exchange-kubernetes --image=jkllucas/mmv2-currency-exchange-service-kubernetes:0.0.11-SNAPSHOT
+> kubectl expose deployment currency-exchange-kubernetes --type=LoadBalancer --port=8000
 
+> kubectl create deployment currency-conversion-kubernetes --image=jkllucas/mmv2-currency-conversion-service-kubernetes:0.0.11-SNAPSHOT
+> kubectl expose deployment currency-conversion-kubernetes --type=LoadBalancer --port=8100
 
+59.4) About the endpoints (IP and Port) of your application:
+Goolge Cloud -> Kubernetes Engine -> currency-exchange-kubernetes will tell you.
 
+60) get all items, such as pods, services, replicaset...etc:
+> kubectl get all
+
+61) Setup Kubectl for Google Cloud for DEB:
+Ref: https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+61.1 Steps:
+> sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+> gke-gcloud-auth-plugin --version 
+> export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+> source ~/.bashrc
+> gcloud components update
+> gcloud container clusters get-credentials CLUSTER_NAME
+(Replace the CLUSTER_NAME with the name of your cluster.)
+61.2) To fix error of setup, use the following steps:
+Install gke-gcloud-auth-plugin as described above.
+61.2.1) Update to the latest Gcloud tool using the cloud-sdk gcloud components update.
+61.2.2Rerun the following command to update the configuration for the cluster.
+> gcloud container clusters get-credentials CLUSTER_NAME
+(Replace the CLUSTER_NAME with the name of your cluster.)
+
+62) If 61) failed due to got the error: 
 
 

@@ -332,6 +332,19 @@ Install gke-gcloud-auth-plugin as described above.
 > gcloud container clusters get-credentials CLUSTER_NAME
 (Replace the CLUSTER_NAME with the name of your cluster.)
 
-62) If 61) failed due to got the error: 
+62) Soultion if "Unable to use KubeCTL with Google Cloud CLI: gke-gcloud-auth-plugin is not installed #6778" hit: 
+he following snippet seems to work on Ubuntu 22.04:
+Ref: https://github.com/actions/runner-images/issues/6778
 
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+sudo apt update
+sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin kubectl
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+gcloud auth activate-service-account azure-devops-service-account@YOUR_GOOGLE_CLOUD_PROJECT_NAME.iam.gserviceaccount.com \
+          --key-file <(echo $(GOOGLE_CLOUD_SERVICE_ACCOUNT_JSON)  | base64 -d)
+(echo $(GOOGLE_CLOUD_SERVICE_ACCOUNT_JSON) | base64 -d) > $HOME/.config/gcloud/application_default_credentials.json
+gcloud container clusters get-credentials --zone "europe-west3" "YOUR_KUBERNETES_CLUSTER_NAME" --project=YOUR_GOOGLE_CLOUD_PROJECT_NAME
+kubectl get pods
 

@@ -332,7 +332,7 @@ Install gke-gcloud-auth-plugin as described above.
 > gcloud container clusters get-credentials CLUSTER_NAME
 (Replace the CLUSTER_NAME with the name of your cluster.)
 
-62) Soultion if "Unable to use KubeCTL with Google Cloud CLI: gke-gcloud-auth-plugin is not installed #6778" hit: 
+62) Solution if "Unable to use KubeCTL with Google Cloud CLI: gke-gcloud-auth-plugin is not installed #6778" hit: 
 he following snippet seems to work on Ubuntu 22.04:
 Ref: https://github.com/actions/runner-images/issues/6778
 
